@@ -5,7 +5,8 @@ import Counter from "./components/Counter";
 export default function App() {
   return (
     <div className="App">
-      <Counter />
+      <Counter name="click1" />
+      <Counter name="click2" />
       <Counter />
     </div>
   );
