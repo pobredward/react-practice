@@ -7,7 +7,6 @@ export default function App() {
     <div className="App">
       <Counter name="click1" />
       <Counter name="click2" />
-      <Counter />
     </div>
   );
 }
