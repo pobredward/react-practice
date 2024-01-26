@@ -1,5 +1,6 @@
 import React from "react";
 import "./styles.css";
+import Movie from "./components/Movie";
 
 export default function App() {
   const movies = [
@@ -9,10 +10,7 @@ export default function App() {
   ];
 
   const renderMovies = movies.map((movie) => (
-    <div className="movie" key={movie.title}>
-      <div className="movie-title">{movie.title}</div>
-      <div className="movie-year">{movie.year}</div>
-    </div>
+    <Movie key={movie.title} movie={movie} />
   ));
 
   return (
