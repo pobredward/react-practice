@@ -1,11 +1,11 @@
 import { React } from "react";
 import PropTypes from "prop-types";
 
-export default function Movie(props) {
+export default function Movie({ movie }) {
   return (
     <div className="movie">
-      <div className="movie-title">{props.movie.title}</div>
-      <div className="movie-year">{props.movie.year}</div>
+      <div className="movie-title">{movie.title}</div>
+      <div className="movie-year">{movie.year}</div>
     </div>
   );
 }

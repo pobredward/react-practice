@@ -1,11 +1,9 @@
 import { React, useState, useEffect } from "react";
 import "./styles.css";
 import Movie from "./components/Movie";
+import MovieForm from "./components/MovieForm";
 
 export default function App() {
-  const [movieTitle, setMovieTitle] = useState("");
-  const [movieYear, setMovieYear] = useState("");
-
   const [movies, setMovies] = useState([
     { title: "Kossie1", year: 2020 },
     { title: "Kossie2", year: 2021 },
@@ -16,37 +14,18 @@ export default function App() {
     console.log(movies);
   });
 
-  const addMovie = (e) => {
-    e.preventDefault();
-    setMovies([...movies, { titie: movieTitle, year: movieYear }]);
-    setMovieTitle("");
-    setMovieYear("");
-  };
-
   const renderMovies = movies.map((movie) => (
     <Movie key={movie.title} movie={movie} />
   ));
 
+  const addMovie = (movie) => {
+    setMovies([...movies, movie]);
+  };
+
   return (
     <div className="App">
       <h1>Movie List</h1>
-      <form onSubmit={addMovie}>
-        <input
-          type="text"
-          placeholder="movie title"
-          value={movieTitle}
-          onChange={(e) => setMovieTitle(e.target.value)}
-        />
-        <br />
-        <input
-          type="text"
-          placeholder="movie year"
-          value={movieYear}
-          onChange={(e) => setMovieYear(e.target.value)}
-        />
-        <br />
-        <button type="submit">Add Movie</button>
-      </form>
+      <MovieForm addMovie={addMovie} />
       {renderMovies}
     </div>
   );
