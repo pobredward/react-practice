@@ -4,19 +4,21 @@ import Movie from "./components/Movie";
 import MovieForm from "./components/MovieForm";
 
 export default function App() {
-  const [movies, setMovies] = useState([
-    { title: "Kossie1", year: 2020 },
-    { title: "Kossie2", year: 2021 },
-    { title: "Kossie3", year: 2022 },
-  ]);
+  const [movies, setMovies] = useState([]);
 
   useEffect(() => {
     console.log(movies);
   });
 
-  const renderMovies = movies.map((movie) => (
-    <Movie key={movie.title} movie={movie} />
-  ));
+  const removeMovie = (id) => {
+    setMovies(movies.filter((movie) => movie.id !== id));
+  };
+
+  const renderMovies = movies.length
+    ? movies.map((movie) => (
+        <Movie key={movie.id} movie={movie} removeMovie={removeMovie} />
+      ))
+    : "No movies added";
 
   const addMovie = (movie) => {
     setMovies([...movies, movie]);
