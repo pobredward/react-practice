@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import PropTypes from "prop-types";
+import store from "../store";
 
 export default class AddNumber extends Component {
   constructor(props) {
@@ -16,7 +16,7 @@ export default class AddNumber extends Component {
           type="button"
           value="+"
           onClick={() => {
-            this.props.addNumber(this.state.size);
+            store.dispatch({ type: "INCREMENT", size: this.state.size });
           }}
         />
         <input
@@ -28,7 +28,3 @@ export default class AddNumber extends Component {
     );
   }
 }
-
-AddNumber.propTypes = {
-  addNumber: PropTypes.func,
-};

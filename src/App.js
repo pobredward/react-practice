@@ -15,12 +15,8 @@ export default class App extends Component {
     return (
       <div className="App">
         <h1>Root</h1>
-        <AddNumberRoot
-          addNumber={(size) => {
-            this.setState({ number: this.state.number + size });
-          }}
-        ></AddNumberRoot>
-        <DisplayNumberRoot number={this.state.number}></DisplayNumberRoot>
+        <AddNumberRoot></AddNumberRoot>
+        <DisplayNumberRoot></DisplayNumberRoot>
       </div>
     );
   }
