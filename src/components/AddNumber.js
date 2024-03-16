@@ -1,11 +1,11 @@
 import React, { Component } from "react";
-import store from "../store";
+import PropTypes from "prop-types";
 
 export default class AddNumber extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      size: 2,
+      size: 1,
     };
   }
   render() {
@@ -16,7 +16,7 @@ export default class AddNumber extends Component {
           type="button"
           value="+"
           onClick={() => {
-            store.dispatch({ type: "INCREMENT", size: this.state.size });
+            this.props.onClick(this.state.size);
           }}
         />
         <input
@@ -28,3 +28,7 @@ export default class AddNumber extends Component {
     );
   }
 }
+
+AddNumber.propTypes = {
+  onClick: PropTypes.func,
+};
