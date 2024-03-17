@@ -8,6 +8,7 @@
   ],
   "main": "src/index.js",
   "dependencies": {
+    "bootstrap": "^5.3.3",
     "loader-utils": "3.2.1",
     "postcss-loader": "^8.1.1",
     "prop-types": "^15.8.1",
