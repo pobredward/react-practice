@@ -1,43 +1,28 @@
 import React from "react";
 import "./styles.css";
-
-const hardCalculate = (number) => {
-  console.log("Big calculation...");
-  for (let i = 0; i < 100; i++) {
-    console.log("_");
-  }
-  return number + 100000;
-};
-
-const easyCalculate = (number) => {
-  console.log("Easy calculation!");
-  return number + 1;
-};
+import Box from "./components/Box";
 
 export default function App() {
-  const [hardNumber, setHardNumber] = React.useState(1);
-  const [easyNumber, setEasyNumber] = React.useState(1);
+  const [size, setSize] = React.useState(100);
+  const [isDark, setIsDark] = React.useState(false);
 
-  const hardSum = React.useMemo(() => hardCalculate(hardNumber), [hardNumber]);
-  const easySum = easyCalculate(easyNumber);
+  const createBoxStyle = React.useCallback(() => {
+    return {
+      width: `${size}px`,
+      height: `${size}px`,
+      backgroundColor: "red",
+    };
+  }, [size]);
 
   return (
-    <div className="App">
-      <h1>Hard Calculation</h1>
+    <div className="App" style={{ background: isDark ? "black" : "white" }}>
       <input
         type="number"
-        value={hardNumber}
-        onChange={(e) => setHardNumber(parseInt(e.target.value))}
+        value={size}
+        onChange={(e) => setSize(e.target.value)}
       ></input>
-      <span> + 10000 = {hardSum}</span>
-
-      <h1>Easy Calculation</h1>
-      <input
-        type="number"
-        value={easyNumber}
-        onChange={(e) => setEasyNumber(parseInt(e.target.value))}
-      ></input>
-      <span> + 1 = {easySum}</span>
+      <button onClick={() => setIsDark(!isDark)}>Change Theme</button>
+      <Box createBoxStyle={createBoxStyle}></Box>
     </div>
   );
 }
