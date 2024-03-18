@@ -1,75 +1,32 @@
 import React from "react";
 import "./styles.css";
-import Student from "./components/Student";
+import useInput from "./useInput";
 
-const reducer = (state, action) => {
-  switch (action.type) {
-    case "add":
-      return {
-        count: state.count + 1,
-        students: [
-          ...state.students,
-          { id: Date.now(), name: action.payload.name, isHere: false },
-        ],
-      };
-    case "delete":
-      return {
-        count: state.count - 1,
-        students: state.students.filter(
-          (student) => student.id !== action.payload.id,
-        ),
-      };
-    case "mark":
-      return {
-        count: state.count,
-        students: state.students.map((student) => {
-          if (student.id === action.payload.id) {
-            return { ...student, isHere: !student.isHere };
-          }
-          return student;
-        }),
-      };
-    default:
-      return state;
-  }
-};
-
-const initialState = {
-  count: 0,
-  students: [],
+const displayMessage = (msg) => {
+  alert(msg);
 };
 
 export default function App() {
-  const [name, setName] = React.useState("");
-  const [studentsInfo, dispatch] = React.useReducer(reducer, initialState);
-
-  React.useEffect(() => {
-    setName("");
-  }, [studentsInfo.count]);
+  const [name, handleName, submitName] = useInput("", displayMessage);
+  const [pw, handlePw, submitPw] = useInput("", displayMessage);
 
   return (
     <div className="App">
-      <h1>출석부</h1>
-      <h3>총 학생 수: {studentsInfo.count}</h3>
+      <h1>UseInput</h1>
       <input
         type="text"
+        placeholder="Type here..."
         value={name}
-        onChange={(e) => setName(e.target.value)}
-      ></input>
-      <button onClick={() => dispatch({ type: "add", payload: { name } })}>
-        Add
-      </button>
-      {studentsInfo.students.map((student) => {
-        return (
-          <Student
-            key={student.id}
-            name={student.name}
-            dispatch={dispatch}
-            id={student.id}
-            isHere={student.isHere}
-          />
-        );
-      })}
+        onChange={handleName}
+      />
+      <button onClick={submitName}>Check</button>
+      <input
+        type="text"
+        placeholder="Type here..."
+        value={pw}
+        onChange={handlePw}
+      />
+      <button onClick={submitPw}>Check</button>
     </div>
   );
 }
