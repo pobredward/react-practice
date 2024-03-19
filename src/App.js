@@ -1,32 +1,19 @@
 import React from "react";
 import "./styles.css";
-import useInput from "./useInput";
+import useFetch from "./useFetch";
 
-const displayMessage = (msg) => {
-  alert(msg);
-};
+const baseUrl = "https://jsonplaceholder.typicode.com";
 
 export default function App() {
-  const [name, handleName, submitName] = useInput("", displayMessage);
-  const [pw, handlePw, submitPw] = useInput("", displayMessage);
+  const { data: userData } = useFetch(baseUrl, "users");
+  const { data: postData } = useFetch(baseUrl, "posts");
 
   return (
     <div className="App">
-      <h1>UseInput</h1>
-      <input
-        type="text"
-        placeholder="Type here..."
-        value={name}
-        onChange={handleName}
-      />
-      <button onClick={submitName}>Check</button>
-      <input
-        type="text"
-        placeholder="Type here..."
-        value={pw}
-        onChange={handlePw}
-      />
-      <button onClick={submitPw}>Check</button>
+      <h1>User</h1>
+      {userData && <pre>{JSON.stringify(userData[0], null, 2)}</pre>}
+      <h1>Post</h1>
+      {userData && <pre>{JSON.stringify(postData[0], null, 2)}</pre>}
     </div>
   );
 }
